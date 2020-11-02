@@ -1,0 +1,57 @@
+void OnTick()
+  {
+//--------
+
+   double AccountMarginStopOut = AccountInfoDouble(ACCOUNT_MARGIN_SO_CALL);    
+   double AccountMarginFinalStopOut = AccountInfoDouble(ACCOUNT_MARGIN_SO_SO);
+   double MyAccountProfit = AccountInfoDouble(ACCOUNT_PROFIT); 
+   
+//--------
+	     // if we have less than 5 orders
+	     if (OrdersTotal()<5)
+	     
+
+   //XAUUSD and EURUSD    ALLWAY TRIPLES
+    if(Close[1]>Open[1])
+   {
+    
+        int buyticket = OrderSend( Symbol(), OP_BUY , 0.60, Ask, 0, 0, 0, "My order", 12301231, 0, clrGreen);
+
+       // TrailStopSellPair();
+   } 
+
+     
+	     if (AccountEquity()>AccountBalance())
+	     CloseAllTradesThisPair();  
+	
+	
+	    Comment ("Equity: ",AccountEquity(), "\n",
+	             "Balance: ",AccountBalance(), "\n",
+	             "My Account Margin Stop Out Call: " ,AccountMarginStopOut, "\n",
+                "My Account Margin Final Stop Out: " ,AccountMarginFinalStopOut, "\n",    
+                "My Account Profit: " ,MyAccountProfit, "\n" 
+	             
+	             
+	             
+	             );
+  }
+//+------------------------------------------------------------------+
+// We create a function to close all trades for this pair
+double CloseAllTradesThisPair()
+{  
+
+	// go through all open orders
+	for (int i=OrdersTotal(); i>=0;i--) 
+	{
+		// select a trade
+		if (OrderSelect(i,SELECT_BY_POS)== true) 
+
+		// check if trade belongs to current chart
+		if (OrderSymbol() == Symbol()) 
+		{  
+			// close the current trade order
+			OrderClose( OrderTicket(), OrderLots(), MarketInfo(OrderSymbol(), MODE_BID), 5, Red ); 
+		}
+	} // End For Loop
+	
+}
