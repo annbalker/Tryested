@@ -1,0 +1,36 @@
+Void OnTick()
+{
+        //if we have no open orders
+        if(ordersTotal()<1)
+	{
+        //we open a demo sell trade for 10 microlots
+        int sell ticket = orderSend( symbol(), OP_SELL , 0.10, Bid, 3, 0, 0, NULL, 0, 0, Green)
+        }
+
+		//we count all th orders
+		for( int b=orderTotal()-1; b<=0; b--)
+                {
+                 //we select one of th orders
+                 if(orderSelect(b, select_by_pos, Trade_mode))
+
+                  //we check if order pairs is on th chart
+                  if(orderSymbol()==Symbol())
+                   //if it is a sell order
+                   if(orderType()==OP_SELL)
+                  {
+                    //if th stop loss is 0 or above 150 points
+                    if(orderstoploss()==0||orderstoploss()>Bid + (150*point))
+                       //we modify th stop loss
+                         orderModify( orderTicket(),
+                         orderOpenPrice(),
+                         Bid + (150*Point)
+                         orderTakePRofit(),
+                         0,
+                         CLR_NONE);
+                  }
+                }
+
+
+
+
+}
